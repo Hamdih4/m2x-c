@@ -381,6 +381,20 @@ m2x_response m2x_device_location_history(m2x_context *ctx, const char *device_id
   return m2x_make_response(ctx, status, out);
 }
 
+m2x_response m2x_device_delete_location_history(m2x_context *ctx, const char *device_id,
+                                         const char *data)
+{
+  int status;
+  char *path, *out = NULL;
+
+  path = m2x_internal_create_format_string(ctx, "/devices/%s/location/waypoints", device_id);
+
+  status = m2x_client_delete(ctx, path, data, &out);
+  m2x_free(path);
+
+  return m2x_make_response(ctx, status, out);
+}
+
 m2x_response m2x_device_metadata(m2x_context *ctx, const char *device_id)
 {
   int status;

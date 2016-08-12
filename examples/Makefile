@@ -3,7 +3,7 @@ CFLAGS=-O2 -Wall -Wextra -std=c89 -I..
 LDFLAGS=-lcurl
 M2X_LIB=../m2x.a
 
-BINS=m2x_status list_devices create_device update_device delete_device_values serialize_json export_values  add_device_to_collection remove_device_from_collection
+BINS=m2x_status list_devices create_device update_device delete_device_values serialize_json export_values  add_device_to_collection remove_device_from_collection delete_location_history
 
 all: $(BINS)
 
@@ -32,6 +32,9 @@ add_device_to_collection: add_device_to_collection.o $(M2X_LIB)
 	$(CC) -o $@ $(LDFLAGS) $^
 
 remove_device_from_collection: remove_device_from_collection.o $(M2X_LIB)
+	$(CC) -o $@ $(LDFLAGS) $^
+
+delete_location_history: delete_location_history.o $(M2X_LIB)
 	$(CC) -o $@ $(LDFLAGS) $^
 
 %.o: %.c
